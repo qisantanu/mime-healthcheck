@@ -1,0 +1,43 @@
+# SQLite. Versions 3.8.0 and up are supported.
+#   gem 'activerecord-jdbcsqlite3-adapter'
+#
+# Configure Using Gemfile
+# gem 'activerecord-jdbcsqlite3-adapter'
+#
+default: &default
+  adapter: sqlite3
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: db/development.sqlite3
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: db/test.sqlite3
+
+production:
+  <<: *default
+  database: db/production.sqlite3
+
+default: &default
+  adapter: oracle_enhanced
+  # database: "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=tcp)(HOST=localhost)(PORT=8833)))(CONNECT_DATA=(SERVICE_NAME=ORCL)))" # xe
+  database: "(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=tcp)(HOST=localhost)(PORT=32769)))(CONNECT_DATA=(SERVICE_NAME=XEPDB1)))" # xe
+  #database: (DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=tcp)(HOST=erp2-dev-db-oracle.cg2gjjycqghs.ap-southeast-1.rds.amazonaws.com)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=ORCL)))
+  host: connection-string
+  username: TDCID
+  password: oracleqi123
+  connect_timeout: <%= ENV['ORACLE_CONNECT_TIMEOUT'] || 60000 %>
+  read_timeout: <%= ENV['ORACLE_READ_TIMEOUT'] || 540000 %>
+  pool: <%= ENV['POOL_SIZE'] || 25 %>
+  statement_limit: 250
+
+development:
+  <<: *default
+
+production:
+  <<: *default

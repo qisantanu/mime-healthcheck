@@ -1,0 +1,33 @@
+# Logs
+log/
+*.log
+
+# Databases
+db/*.sqlite3
+db/*.sqlite3-journal
+
+# Temporary files
+tmp/
+*.pid
+development_secret.txt
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Build artifacts
+*.war
+*.jar
+mima_overlay.sh
+
+# Bundler
+/.bundle/
+vendor/bundle/
+Gemfile.lock
+
+# Environment
+.env
+.env.local
